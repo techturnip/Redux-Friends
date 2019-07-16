@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 // Materialize CSS
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css'
-// Styles
-import './App.scss'
+
+// Components
+import Navigation from './components/Navigation/Navigation'
+import Footer from './components/Footer/Footer'
 
 class App extends Component {
   componentDidMount() {
@@ -14,9 +16,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        <header>
+          <Navigation />
           <h1>Friends app</h1>
         </header>
+
+        <Footer />
       </div>
     )
   }
