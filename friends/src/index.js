@@ -2,7 +2,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 // Root Styles
-import './index.css'
+import './index.scss'
 // Root Component
 import App from './App'
 // Redux

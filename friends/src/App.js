@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css'
 // Styles
-import './App.css'
+import './App.scss'
 
 class App extends Component {
   componentDidMount() {
