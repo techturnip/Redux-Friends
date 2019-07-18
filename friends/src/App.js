@@ -5,7 +5,10 @@ import M from 'materialize-css'
 
 // Components
 import Navigation from './components/Navigation/Navigation'
+import FriendsList from './components/Friends/FriendsList'
+import Login from './components/Login/Login'
 import Footer from './components/Footer/Footer'
+import { Row, Col } from 'react-materialize'
 
 class App extends Component {
   componentDidMount() {
@@ -18,8 +21,13 @@ class App extends Component {
       <div className="App">
         <header>
           <Navigation />
-          <h1>Friends app</h1>
         </header>
+
+        <section className="container">
+          <FriendsList />
+
+          <Login />
+        </section>
 
         <Footer />
       </div>
