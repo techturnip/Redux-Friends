@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getFriends } from '../../actions'
-import { Card, Col, Preloader } from 'react-materialize'
+import { Card, Col, Preloader, Button } from 'react-materialize'
 
 class FriendsList extends Component {
   componentDidMount() {
@@ -10,10 +10,7 @@ class FriendsList extends Component {
   }
 
   render() {
-    console.log(this.props)
     const { friends, isLoading } = this.props
-
-    console.log(typeof isLoading)
 
     if (isLoading) {
       return (
@@ -28,9 +25,15 @@ class FriendsList extends Component {
         {friends.map(friend => {
           const { name, age, email, id } = friend
           return (
-            <Card className="friend-card" key={id} title={name}>
-              <p>Age: {age}</p>
-              <p>Email: {email}</p>
+            <Card className="friend-card hoverable" key={id} title={name}>
+              <div className="no-flex">
+                <p>Age: {age}</p>
+                <p>Email: {email}</p>
+              </div>
+              <div className="no-flex">
+                <Button className="red" icon="delete" />
+                <Button className="green lighten-1" icon="edit" />
+              </div>
             </Card>
           )
         })}

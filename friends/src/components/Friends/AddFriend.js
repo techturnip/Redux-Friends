@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import { TextInput, Button, Icon } from 'react-materialize'
+import { addFriend } from '../../actions'
 import { connect } from 'react-redux'
-import { login } from '../../actions'
-import { Button, TextInput, Icon, Row, Col } from 'react-materialize'
 
-class Login extends Component {
-  constructor(props) {
-    super(props)
+class AddFriend extends Component {
+  constructor() {
+    super()
 
     this.state = {
-      username: '',
-      password: ''
+      name: '',
+      age: '',
+      email: ''
     }
   }
 
@@ -18,9 +19,16 @@ class Login extends Component {
     e.preventDefault()
 
     console.log(this.props)
-    const { username, password } = this.state
+    const { name, age, email } = this.state
+
+    const friend = {
+      name,
+      age,
+      email
+    }
+
     this.props
-      .login(username, password)
+      .addFriend(friend)
       .then(() => this.props.history.push('/'))
       .catch(err => console.error(err))
   }
@@ -32,50 +40,50 @@ class Login extends Component {
   }
 
   render() {
-    const { username, password } = this.state
-
+    const { name, age, email } = this.state
     return (
-      <Row className="login card">
-        <Col offset="s3" s={6}>
-          <h4 className="login-title">Login to see your friends</h4>
-
+      <div className="add-friend">
+        <h3>Add a Friend:</h3>
+        <div>
           <form onSubmit={this.onSubmit}>
             <TextInput
               type="text"
-              name="username"
-              label="Username"
-              value={username}
+              name="name"
+              label="Name"
+              value={name}
               onChange={this.onChange}
             />
             <TextInput
-              type="password"
-              name="password"
-              label="Password"
-              value={password}
+              type="number"
+              name="age"
+              label="Age"
+              value={age}
+              onChange={this.onChange}
+            />
+            <TextInput
+              type="email"
+              name="email"
+              label="Email"
+              value={email}
               onChange={this.onChange}
             />
             <Button type="submit" waves="light" className="green lighten-1">
               Submit <Icon right>send</Icon>
             </Button>
           </form>
-        </Col>
-      </Row>
+        </div>
+      </div>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  isLoading: state.isLoading,
-  errorMessage: state.errorMessage
-})
-
 const mapDispatchToProps = {
-  login
+  addFriend
 }
 
 export default withRouter(
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
-  )(Login)
+  )(AddFriend)
 )

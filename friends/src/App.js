@@ -12,6 +12,7 @@ import Navigation from './components/Navigation/Navigation'
 import Friends from './components/Friends/Friends'
 import Login from './components/Login/Login'
 import Footer from './components/Footer/Footer'
+import AddFriend from './components/Friends/AddFriend'
 
 class App extends Component {
   componentDidMount() {
@@ -28,6 +29,8 @@ class App extends Component {
 
         <section className="container">
           <PrivateRoute exact path="/" component={Friends} />
+
+          <Route exact path="/add" component={AddFriend} />
 
           <Route exact path="/login" component={Login} />
         </section>

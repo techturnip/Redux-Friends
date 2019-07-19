@@ -1,0 +1,38 @@
+.friends {
+
+  .friends-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    border-bottom: solid 1px lightgray;
+
+    h3 {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+.friend-card {
+  .card-content {
+    div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .no-flex {
+        display: block;
+
+        .btn {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+
+}
+
+.add-friend {
+  padding: 5rem 0;
+}
