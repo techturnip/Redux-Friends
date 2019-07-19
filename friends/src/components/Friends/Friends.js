@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Row } from 'react-materialize'
+import { Row, Icon } from 'react-materialize'
 import FriendsList from './FriendsList'
 
 class Friends extends Component {
@@ -9,7 +9,9 @@ class Friends extends Component {
       <div className="friends">
         <div className="friends-title">
           <h3>Friends List:</h3>
-          <Link to="/add">Add Friend</Link>
+          <Link className="btn green lighten-1" to="/add">
+            <Icon left>add</Icon> Add Friend
+          </Link>
         </div>
         <Row>
           <FriendsList />

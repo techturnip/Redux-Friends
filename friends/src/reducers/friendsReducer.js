@@ -5,6 +5,12 @@ import {
   ADD_FRIEND_START,
   ADD_FRIEND_SUCCESS,
   ADD_FRIEND_FAILED,
+  UPDATE_FRIEND_START,
+  UPDATE_FRIEND_SUCCESS,
+  UPDATE_FRIEND_FAILED,
+  DELETE_FRIEND_START,
+  DELETE_FRIEND_SUCCESS,
+  DELETE_FRIEND_FAILED,
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
@@ -34,8 +40,7 @@ export const friendsReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         errorMessage: null,
-        friends: action.payload,
-        isLoggedIn: true
+        friends: action.payload
       }
     }
     case GET_FRIENDS_FAILED: {
@@ -60,6 +65,49 @@ export const friendsReducer = (state = initialState, action) => {
       }
     }
     case ADD_FRIEND_FAILED: {
+      return {
+        ...state,
+        isLoading: false,
+        errorMessage: action.payload
+      }
+    }
+    // UPDATE_FRIEND ===========================================|
+    case UPDATE_FRIEND_START: {
+      return {
+        ...state,
+        isLoading: true
+      }
+    }
+    case UPDATE_FRIEND_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        errorMessage: null
+      }
+    }
+    case UPDATE_FRIEND_FAILED: {
+      return {
+        ...state,
+        isLoading: false,
+        errorMessage: action.payload
+      }
+    }
+    // DELETE_FRIEND ===========================================|
+    case DELETE_FRIEND_START: {
+      return {
+        ...state,
+        isLoading: true
+      }
+    }
+    case DELETE_FRIEND_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        errorMessage: null,
+        friends: action.payload
+      }
+    }
+    case DELETE_FRIEND_FAILED: {
       return {
         ...state,
         isLoading: false,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getFriends } from '../../actions'
+import { getFriends, deleteFriend } from '../../actions'
 import { Card, Col, Preloader, Button } from 'react-materialize'
 
 class FriendsList extends Component {
@@ -31,8 +31,18 @@ class FriendsList extends Component {
                 <p>Email: {email}</p>
               </div>
               <div className="no-flex">
-                <Button className="red" icon="delete" />
-                <Button className="green lighten-1" icon="edit" />
+                <Button
+                  className="red"
+                  icon="delete"
+                  onClick={() => this.props.deleteFriend(id)}
+                />
+                <Button
+                  onClick={() => {
+                    this.props.history.push(`/friends/${id}`)
+                  }}
+                  className="green lighten-1"
+                  icon="edit"
+                />
               </div>
             </Card>
           )
@@ -48,7 +58,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  getFriends
+  getFriends,
+  deleteFriend
 }
 
 export default withRouter(

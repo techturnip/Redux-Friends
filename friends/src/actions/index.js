@@ -9,6 +9,12 @@ export const GET_FRIENDS_FAILED = 'GET_FRIENDS_FAILED'
 export const ADD_FRIEND_START = 'ADD_FRIEND_START'
 export const ADD_FRIEND_SUCCESS = 'ADD_FRIEND_SUCCESS'
 export const ADD_FRIEND_FAILED = 'ADD_FRIEND_FAILED'
+export const UPDATE_FRIEND_START = 'UPDATE_FRIEND_START'
+export const UPDATE_FRIEND_SUCCESS = 'UPDATE_FRIEND_SUCCESS'
+export const UPDATE_FRIEND_FAILED = 'UPDATE_FRIEND_FAILED'
+export const DELETE_FRIEND_START = 'DELETE_FRIEND_START'
+export const DELETE_FRIEND_SUCCESS = 'DELETE_FRIEND_SUCCESS'
+export const DELETE_FRIEND_FAILED = 'DELETE_FRIEND_FAILED'
 
 //==============================================================|
 // Login/Logout action types
@@ -44,7 +50,6 @@ export function getFriends() {
 // addFriend() - Add a friend to list of friends by passing a
 // friend obj to the API
 export function addFriend(friend) {
-  console.log(friend)
   return dispatch => {
     dispatch({ type: ADD_FRIEND_START })
 
@@ -52,7 +57,6 @@ export function addFriend(friend) {
       Authorization: localStorage.getItem('token')
     }
 
-    console.log(headers)
     return axios
       .post('http://localhost:5000/api/friends', friend, {
         headers
@@ -63,6 +67,55 @@ export function addFriend(friend) {
       .catch(err => {
         const payload = err.response ? err.response.data : err
         dispatch({ type: ADD_FRIEND_FAILED, payload })
+      })
+  }
+}
+
+//==============================================================|
+// updateFriend() - Update friend's data
+export function updateFriend(friend) {
+  return dispatch => {
+    dispatch({ type: UPDATE_FRIEND_START })
+
+    const headers = {
+      Authorization: localStorage.getItem('token')
+    }
+
+    return axios
+      .put(`http://localhost:5000/api/friends/${friend.id}`, friend, {
+        headers
+      })
+      .then(res => {
+        dispatch({ type: UPDATE_FRIEND_SUCCESS, payload: res.data })
+      })
+      .catch(err => {
+        const payload = err.response ? err.response.data : err
+        dispatch({ type: UPDATE_FRIEND_FAILED, payload })
+      })
+  }
+}
+
+//==============================================================|
+// deleteFriend() - Remove friend from the list
+export function deleteFriend(id) {
+  return dispatch => {
+    dispatch({ type: DELETE_FRIEND_START })
+
+    const headers = {
+      Authorization: localStorage.getItem('token')
+    }
+
+    return axios
+      .delete(`http://localhost:5000/api/friends/${id}`, {
+        headers
+      })
+      .then(res => {
+        console.log(res.data)
+        dispatch({ type: DELETE_FRIEND_SUCCESS, payload: res.data })
+      })
+      .catch(err => {
+        const payload = err.response ? err.response.data : err
+        dispatch({ type: DELETE_FRIEND_FAILED, payload })
       })
   }
 }
