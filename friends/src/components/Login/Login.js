@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { login } from '../../actions'
 import { Button, TextInput, Icon, Row, Col } from 'react-materialize'
 
 class Login extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       username: '',
@@ -16,9 +17,12 @@ class Login extends Component {
   onSubmit = e => {
     e.preventDefault()
 
-    console.log('Login Form Submitted')
-
-    this.setState({ username: '', password: '' })
+    console.log(this.props)
+    const { username, password } = this.state
+    this.props
+      .login(username, password)
+      .then(() => this.props.history.push('/'))
+      .catch(err => console.error(err))
   }
 
   onChange = e => {
@@ -60,9 +64,18 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  isLoading: state.isLoading,
+  errorMessage: state.errorMessage
+})
+
+const mapDispatchToProps = {
+  login
+}
+
 export default withRouter(
   connect(
-    null,
-    null
+    mapStateToProps,
+    mapDispatchToProps
   )(Login)
 )
