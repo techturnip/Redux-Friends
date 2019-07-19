@@ -19,7 +19,7 @@ class Footer extends Component {
     return (
       <MFooter
         copyrights={`© ${date.getFullYear()} Tyler Turnipseed`}
-        moreLinks={<a />}
+        moreLinks={<span className="footer-link" />}
         links={
           <ul className="footer-links">
             {isLoggedIn && (

@@ -18,10 +18,8 @@ class UpdFriend extends Component {
   }
 
   componentDidMount() {
-    const id = this.props.match.params.id
-    const friend = this.props.friends.find(friend => friend.id == id)
-
-    console.log(friend)
+    const id = Number(this.props.match.params.id)
+    const friend = this.props.friends.find(friend => friend.id === id)
 
     if (!friend) {
       this.props.history.push('/')
