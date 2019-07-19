@@ -13,6 +13,20 @@ export const LOGIN_FAILED = 'LOGIN_FAILED'
 export function getFriends() {
   return dispatch => {
     dispatch({ type: GET_FRIENDS_START })
+
+    const headers = {
+      Authorization: localStorage.getItem('token')
+    }
+
+    axios
+      .get('http://localhost:5000/api/friends', { headers })
+      .then(res => {
+        dispatch({ type: GET_FRIENDS_SUCCESS, payload: res.data })
+      })
+      .catch(err => {
+        const payload = err.response ? err.response.data : err
+        dispatch({ type: GET_FRIENDS_FAILED, payload })
+      })
   }
 }
 

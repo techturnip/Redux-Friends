@@ -9,7 +9,7 @@ import PrivateRoute from './components/Router/PrivateRoute'
 
 // Components
 import Navigation from './components/Navigation/Navigation'
-import FriendsList from './components/Friends/FriendsList'
+import Friends from './components/Friends/Friends'
 import Login from './components/Login/Login'
 import Footer from './components/Footer/Footer'
 
@@ -27,7 +27,7 @@ class App extends Component {
         </header>
 
         <section className="container">
-          <PrivateRoute exact path="/" component={FriendsList} />
+          <PrivateRoute exact path="/" component={Friends} />
 
           <Route exact path="/login" component={Login} />
         </section>
