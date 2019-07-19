@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Navbar, NavItem } from 'react-materialize'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { logout } from '../../actions'
 
 class Navigation extends Component {
@@ -18,7 +18,7 @@ class Navigation extends Component {
     return (
       <Navbar
         className="main-nav green lighten-1"
-        brand={<span>Friends App</span>}
+        brand={<Link to="/">Friends App</Link>}
         fixed
         alignLinks="right"
       >

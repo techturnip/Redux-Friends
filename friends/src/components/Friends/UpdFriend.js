@@ -58,7 +58,6 @@ class UpdFriend extends Component {
   }
 
   render() {
-    console.log(this.props)
     const { name, age, email } = this.state
     return (
       <div className="add-friend">

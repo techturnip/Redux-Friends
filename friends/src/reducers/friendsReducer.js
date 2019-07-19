@@ -40,7 +40,8 @@ export const friendsReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         errorMessage: null,
-        friends: action.payload
+        friends: action.payload,
+        isLoggedIn: true
       }
     }
     case GET_FRIENDS_FAILED: {
@@ -61,7 +62,8 @@ export const friendsReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        errorMessage: null
+        errorMessage: null,
+        isLoggedIn: true
       }
     }
     case ADD_FRIEND_FAILED: {
@@ -82,7 +84,8 @@ export const friendsReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        errorMessage: null
+        errorMessage: null,
+        isLoggedIn: true
       }
     }
     case UPDATE_FRIEND_FAILED: {
@@ -104,6 +107,7 @@ export const friendsReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         errorMessage: null,
+        isLoggedIn: true,
         friends: action.payload
       }
     }
