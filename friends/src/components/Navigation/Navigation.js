@@ -1,8 +1,20 @@
 import React, { Component } from 'react'
 import { Navbar, NavItem } from 'react-materialize'
+import { connect } from 'react-redux'
+import { withRouter, Link } from 'react-router-dom'
+import { logout } from '../../actions'
 
 class Navigation extends Component {
+  handleClick = e => {
+    e.preventDefault()
+
+    this.props.logout()
+    this.props.history.push('/login')
+  }
+
   render() {
+    const { isLoggedIn } = this.props
+
     return (
       <Navbar
         className="main-nav green lighten-1"
@@ -10,11 +22,23 @@ class Navigation extends Component {
         fixed
         alignLinks="right"
       >
-        <NavItem href="#">Login</NavItem>
-        <NavItem href="#">Logout</NavItem>
+        {isLoggedIn && <NavItem onClick={this.handleClick}>Logout</NavItem>}
       </Navbar>
     )
   }
 }
 
-export default Navigation
+const mapStateToProps = state => ({
+  isLoggedIn: state.friendsReducer.isLoggedIn
+})
+
+const mapDispatchToProps = {
+  logout
+}
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Navigation)
+)

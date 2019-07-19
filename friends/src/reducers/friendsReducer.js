@@ -7,7 +7,8 @@ import {
   ADD_FRIEND_FAILED,
   LOGIN_START,
   LOGIN_SUCCESS,
-  LOGIN_FAILED
+  LOGIN_FAILED,
+  LOGOUT
 } from '../actions'
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
 
 export const friendsReducer = (state = initialState, action) => {
   switch (action.type) {
+    // GET_FRIENDS ==========================================|
     case GET_FRIENDS_START: {
       console.log(state)
       return {
@@ -32,7 +34,8 @@ export const friendsReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         errorMessage: null,
-        friends: action.payload
+        friends: action.payload,
+        isLoggedIn: true
       }
     }
     case GET_FRIENDS_FAILED: {
@@ -42,6 +45,7 @@ export const friendsReducer = (state = initialState, action) => {
         errorMessage: action.payload
       }
     }
+    // ADD_FRIEND ===========================================|
     case ADD_FRIEND_START: {
       return {
         ...state,
@@ -49,7 +53,6 @@ export const friendsReducer = (state = initialState, action) => {
       }
     }
     case ADD_FRIEND_SUCCESS: {
-      // const withNewFriend = state.friends.concat(action.payload)
       return {
         ...state,
         isLoading: false,
@@ -63,6 +66,7 @@ export const friendsReducer = (state = initialState, action) => {
         errorMessage: action.payload
       }
     }
+    // LOGIN ================================================|
     case LOGIN_START: {
       return {
         ...state,
@@ -73,14 +77,24 @@ export const friendsReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        errorMessage: null
+        errorMessage: null,
+        isLoggedIn: true
       }
     }
     case LOGIN_FAILED: {
       return {
         ...state,
         isLoading: false,
-        errorMessage: action.payload
+        errorMessage: action.payload,
+        isLoggedIn: false
+      }
+    }
+    case LOGOUT: {
+      localStorage.removeItem('token')
+
+      return {
+        ...state,
+        isLoggedIn: false
       }
     }
     default:

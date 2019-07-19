@@ -30,7 +30,7 @@ class App extends Component {
         <section className="container">
           <PrivateRoute exact path="/" component={Friends} />
 
-          <Route exact path="/add" component={AddFriend} />
+          <PrivateRoute exact path="/add" component={AddFriend} />
 
           <Route exact path="/login" component={Login} />
         </section>

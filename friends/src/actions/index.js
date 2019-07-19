@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+// ACTION TYPES ================================================|
+//==============================================================|
 // Friends action types
 export const GET_FRIENDS_START = 'GET_FRIENDS_START'
 export const GET_FRIENDS_SUCCESS = 'GET_FRIENDS_SUCCESS'
@@ -8,23 +10,16 @@ export const ADD_FRIEND_START = 'ADD_FRIEND_START'
 export const ADD_FRIEND_SUCCESS = 'ADD_FRIEND_SUCCESS'
 export const ADD_FRIEND_FAILED = 'ADD_FRIEND_FAILED'
 
-// Login action types
+//==============================================================|
+// Login/Logout action types
 export const LOGIN_START = 'LOGIN_START'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILED = 'LOGIN_FAILED'
+export const LOGOUT = 'LOGOUT'
 
-// Function to not have to keep fetching token from local storage
-function axiosAuth() {
-  const token = localStorage.getItem('token')
-
-  return axios.create({
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `${token}`
-    }
-  })
-}
-
+// ACTION CREATORS =============================================|
+//==============================================================|
+// getFriends() - Populate list of friends
 export function getFriends() {
   return dispatch => {
     dispatch({ type: GET_FRIENDS_START })
@@ -45,6 +40,9 @@ export function getFriends() {
   }
 }
 
+//==============================================================|
+// addFriend() - Add a friend to list of friends by passing a
+// friend obj to the API
 export function addFriend(friend) {
   console.log(friend)
   return dispatch => {
@@ -55,8 +53,10 @@ export function addFriend(friend) {
     }
 
     console.log(headers)
-    return axiosAuth()
-      .post('http://localhost:5000/api/friends', friend)
+    return axios
+      .post('http://localhost:5000/api/friends', friend, {
+        headers
+      })
       .then(res => {
         dispatch({ type: ADD_FRIEND_SUCCESS, payload: res.data })
       })
@@ -67,6 +67,9 @@ export function addFriend(friend) {
   }
 }
 
+//==============================================================|
+// login(username, password) - Login - sets an authorization
+// token to local storage from the API
 export function login(username, password) {
   return dispatch => {
     dispatch({ type: LOGIN_START })
@@ -81,5 +84,13 @@ export function login(username, password) {
         const payload = err.response ? err.response.data : err
         dispatch({ type: LOGIN_FAILED, payload })
       })
+  }
+}
+
+//==============================================================|
+// logout() - Logout - removes token from localStorage
+export function logout() {
+  return {
+    type: LOGOUT
   }
 }

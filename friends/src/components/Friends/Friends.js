@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter, Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Row } from 'react-materialize'
 import FriendsList from './FriendsList'
 
@@ -20,13 +19,4 @@ class Friends extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isLoading: state.friendsReducer.friends
-})
-
-export default withRouter(
-  connect(
-    null,
-    null
-  )(Friends)
-)
+export default Friends
