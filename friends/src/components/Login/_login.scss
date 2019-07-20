@@ -1,0 +1,14 @@
+div.row.login {
+  padding: 2rem 0;
+  margin: 4rem 0;
+
+  .login-title {
+    margin-bottom: 2rem;
+  }
+
+  form {
+    .col {
+      float: none;
+    }
+  }
+}

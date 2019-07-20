@@ -1,0 +1,16 @@
+.page-footer {
+  .footer-links {
+    .footer-link {
+      cursor: pointer;
+      color: #fff;
+
+      &:hover {
+        color: #ece;
+      }
+    }
+  }
+
+  .footer-copyright {
+    text-align: center;
+  }
+}
